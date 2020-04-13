@@ -300,6 +300,13 @@ class Jibres_domain
 	}
 
 
+	public function domain_history()
+	{
+		$result = self::run('domain/history', 'get');
+		return $result;
+	}
+
+
 	// ---------------------------------------- POLL ---------------------------------------- //
 	public function poll_fetch()
 	{
