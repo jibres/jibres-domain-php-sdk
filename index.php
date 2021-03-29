@@ -12,14 +12,13 @@ class Jibres_domain
 
 	private function run($_path, $_method, $_param = null, $_body = null, $_option = [])
 	{
-		$appkey     = '[YOUR APP KEY]';
-		$apikey     = '[YOUR API KEY]';
-		$registrar  = '[Domain registrar]';
-		$master_url = "https://core.jibres.com/%s/%s/%s";
+		$appkey      = '[YOUR APP KEY]';
+		$accesstoken = '[YOUR API KEY]';
+		$master_url  = "https://core.jibres.com/%s/%s";
 
 		$default_option =
 		[
-			'apikey' => true,
+			'accesstoken' => true,
 		];
 
 		if(!is_array($_option))
@@ -35,14 +34,14 @@ class Jibres_domain
 		$header[] = 'Content-Type:application/json';
 		$header[] = 'appkey: '. $appkey;
 
-		// set header apikey if need
-		if($_option['apikey'])
+		// set header accesstoken if need
+		if($_option['accesstoken'])
 		{
-			$header[] = 'apikey: '. $apikey;
+			$header[] = 'accesstoken: '. $accesstoken;
 		}
 
 
-		$url = sprintf($master_url, 'r10', $registrar, $_path);
+		$url = sprintf($master_url, 'r10', $_path);
 
 		if($_param && is_array($_param))
 		{
@@ -205,7 +204,7 @@ class Jibres_domain
 
 	public function domain_check($_domin)
 	{
-		$result = self::run('domain/check', 'get', ['domain' => $_domin], null, ['apikey' => false]);
+		$result = self::run('domain/check', 'get', ['domain' => $_domin], null, ['accesstoken' => false]);
 		return $result;
 	}
 
@@ -219,7 +218,7 @@ class Jibres_domain
 
 	public function domain_available($_domin)
 	{
-		$result = self::run('domain/available', 'get', ['domain' => $_domin], null, ['apikey' => false]);
+		$result = self::run('domain/available', 'get', ['domain' => $_domin], null, ['accesstoken' => false]);
 		return $result;
 	}
 
